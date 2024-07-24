@@ -28,6 +28,7 @@
 
 #ifdef WIN32
 #include <windows.h>
+#include <tchar.h>
 #else
 #include <dlfcn.h>
 #endif
@@ -63,10 +64,10 @@ vr_vk_load_libvulkan(const struct vr_config *config,
 {
 #ifdef WIN32
 
-        vkfn->lib_vulkan = LoadLibrary("vulkan-1.dll");
+        vkfn->lib_vulkan = LoadLibrary(_T("vulkan-1.dll"));
 
         if (vkfn->lib_vulkan == NULL) {
-                vr_error_message(config, "Error openining vulkan-1.dll");
+                vr_error_message(config, "Error opening vulkan-1.dll");
                 return false;
         }
 
@@ -83,7 +84,7 @@ vr_vk_load_libvulkan(const struct vr_config *config,
         vkfn->lib_vulkan = dlopen(VULKAN_LIB, RTLD_LAZY | RTLD_GLOBAL);
 
         if (vkfn->lib_vulkan == NULL) {
-                vr_error_message(config, "Error openining " VULKAN_LIB ": %s",
+                vr_error_message(config, "Error opening " VULKAN_LIB ": %s",
                                  dlerror());
                 return false;
         }

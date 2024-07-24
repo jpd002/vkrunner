@@ -45,9 +45,10 @@ if(HAVE_FFSL)
   add_definitions(-DHAVE_FFSL)
 endif()
 
+find_package(Vulkan)
 if (NOT VULKAN_HEADER)
   pkg_check_modules(VULKAN vulkan)
-  if(NOT VULKAN_FOUND)
+  if(NOT Vulkan_FOUND)
     CHECK_INCLUDE_FILE(vulkan/vulkan.h HAVE_VULKAN_HEADER)
     if(NOT HAVE_VULKAN_HEADER)
       message(FATAL_ERROR
